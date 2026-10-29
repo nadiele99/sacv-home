@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1200" viewBox="0 0 2400 1200" fill="none">
+<!-- SACV · fundo animado (home). Gerado por assets/img/gerar-fundos.js: edite lá, não aqui.
+     Autocontido: grade + células + animação em CSS dentro deste arquivo, sem JavaScript.
+     Animação (uma vez, ao carregar): cada célula surge e anda de célula em célula até o lugar
+     (transform com steps), como o cursor de uma planilha; a vaga amarela chega por último e
+     o ponto dela aparece com um "pop". Duração total: 1840 ms.
+     Posicione na página centralizado no topo, sem escalar (1 unidade = 1 px). -->
+<defs>
+  <pattern id="grade" width="96" height="32" patternUnits="userSpaceOnUse">
+    <path d="M0 0V32M0 0H96" stroke="#074999" stroke-opacity=".09" stroke-width="2"/>
+  </pattern>
+  <radialGradient id="fade" cx="1200" cy="380" r="1" gradientUnits="userSpaceOnUse"
+    gradientTransform="translate(1200 380) scale(980 560) translate(-1200 -380)">
+    <stop offset=".35" stop-color="#fff"/>
+    <stop offset=".8" stop-color="#fff" stop-opacity="0"/>
+  </radialGradient>
+  <mask id="mascara"><rect width="2400" height="1200" fill="url(#fade)"/></mask>
+</defs>
+<style>
+  .analisada{fill:rgb(0 168 89 / .10);stroke:rgb(0 168 89 / .28);stroke-width:1}
+  .ponto{transform-box:fill-box;transform-origin:center}
+  @keyframes andar0{from{transform:translate(-288px,0px)}to{transform:none}}
+  @keyframes andar1{from{transform:translate(0px,-96px)}to{transform:none}}
+  @keyframes andar2{from{transform:translate(0px,96px)}to{transform:none}}
+  @keyframes andar3{from{transform:translate(-288px,0px)}to{transform:none}}
+  @keyframes andar4{from{transform:translate(0px,-96px)}to{transform:none}}
+  @keyframes andar5{from{transform:translate(288px,0px)}to{transform:none}}
+  @keyframes andar6{from{transform:translate(0px,96px)}to{transform:none}}
+  @keyframes andar7{from{transform:translate(384px,0px)}to{transform:none}}
+  @keyframes surgir{from{opacity:0}to{opacity:1}}
+  @keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
+  @media (prefers-reduced-motion: reduce){*{animation:none!important}}
+</style>
+<rect width="2400" height="1200" fill="url(#grade)" mask="url(#mascara)"/>
+  <rect class="analisada" x="480" y="96" width="96" height="32" style="animation:andar0 780ms steps(3,end) 0ms both,surgir 600ms ease-out 0ms both"/>
+  <rect class="analisada" x="576" y="96" width="96" height="32" style="animation:andar1 780ms steps(3,end) 120ms both,surgir 600ms ease-out 120ms both"/>
+  <rect class="analisada" x="480" y="128" width="96" height="32" style="animation:andar2 780ms steps(3,end) 200ms both,surgir 600ms ease-out 200ms both"/>
+  <rect class="analisada" x="672" y="352" width="96" height="32" style="animation:andar3 780ms steps(3,end) 80ms both,surgir 600ms ease-out 80ms both"/>
+  <rect class="analisada" x="1632" y="288" width="96" height="32" style="animation:andar4 780ms steps(3,end) 60ms both,surgir 600ms ease-out 60ms both"/>
+  <rect class="analisada" x="1728" y="320" width="96" height="32" style="animation:andar5 780ms steps(3,end) 160ms both,surgir 600ms ease-out 160ms both"/>
+  <rect class="analisada" x="1632" y="320" width="96" height="32" style="animation:andar6 780ms steps(3,end) 240ms both,surgir 600ms ease-out 240ms both"/>
+  <g class="vaga" style="animation:andar7 1040ms steps(4,end) 300ms both,surgir 600ms ease-out 300ms both">
+    <rect x="1632" y="96" width="96" height="32" fill="#FFF6D6" stroke="#FFD233" stroke-width="1.5"/>
+    <circle class="ponto" cx="1680" cy="112" r="5" fill="#FFD233" style="animation:pop 500ms cubic-bezier(.3,1.6,.5,1) 1340ms both"/>
+  </g>
+</svg>

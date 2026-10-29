@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 236 48" role="img" aria-label="SACV · Cargas Vagas · GELOT">
+<rect x=".75" y=".75" width="46.5" height="46.5" rx="11.25" fill="#FFFFFF" fill-opacity=".08" stroke="#FFFFFF" stroke-opacity=".28" stroke-width="1.5"/><path d="M13 18 24 35 35 18" stroke="#2ECC7A" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="12.5" r="4" fill="#FFD233"/>
+<text x="60" y="27" font-family="Plus Jakarta Sans, Inter, Arial, sans-serif" font-weight="800" font-size="25" letter-spacing="-.5" fill="#FFFFFF">SAC<tspan fill="#2ECC7A">V</tspan></text>
+<text x="61" y="43" font-family="Inter, Arial, sans-serif" font-weight="500" font-size="11" fill="#FFFFFF" fill-opacity=".8">Cargas Vagas · GELOT</text>
+</svg>

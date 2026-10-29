@@ -1,0 +1,6 @@
+# O site publica só as páginas e os arquivos que elas usam.
+# Documentação interna e ferramentas locais ficam no repositório, mas fora do site.
+CONTEXTO.md
+README.md
+.claude
+assets/img/gerar-fundos.js

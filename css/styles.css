@@ -1,0 +1,358 @@
+/* ==========================================================================
+   SACV · Sistema de Automação de Cargas Vagas (GELOT / SEDUC-AM) — estilos
+   Compartilhado por index.html (home) e login.html.
+   Ordem: 1. Tokens  2. Base  3. Utilitários  4. Componentes (cada bloco indica
+   o data-component correspondente no HTML)  5. Responsivo  6. Movimento
+   Ênfase de cor: VERDE. Azul é a base institucional; amarelo é só "a vaga".
+   ========================================================================== */
+
+/* 1. TOKENS ================================================================ */
+:root {
+  /* Azul institucional (mesmo do rodapé oficial: #074999 → #002E7D) */
+  --azul-950: #001A4D;
+  --azul-900: #002E7D;
+  --azul-700: #074999;
+  --azul-500: #1B5FD0;
+  --azul-100: #E6EEFB;
+  --azul-50:  #F3F7FD;
+
+  /* Verde: cor de ênfase do SACV (botões, números, progresso, destaques) */
+  --verde-950: #032E1C;
+  --verde-900: #054D2B;
+  --verde-800: #066B3A;   /* botão primário: 7,0:1 com branco */
+  --verde-700: #087A43;   /* texto verde: 5,3:1 sobre branco */
+  --verde-500: #00A859;   /* do brasão — decorativo/ícone */
+  --verde-400: #2ECC7A;   /* verde sobre fundo escuro */
+  --verde-100: #E2F6EC;
+  --verde-50:  #F1FBF5;
+
+  /* Amarelo: só o "ponto da vaga" e acentos mínimos */
+  --amarelo-400: #FFD233;
+  --amarelo-100: #FFF6D6;
+
+  --vermelho-600: #C62828;   /* só erro */
+  --vermelho-50:  #FDECEC;
+
+  /* Texto: azul-acinzentado escuro, nunca preto */
+  --cor-texto:       #1C2B4A;
+  --cor-texto-suave: #4E5D7A;
+  --cor-borda:       #DCE4F2;
+  --cor-fundo:       #FFFFFF;
+  --cor-fundo-pagina:#F4F8F6;   /* branco esverdeado bem leve */
+
+  /* Tipografia */
+  --fonte-base: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --fonte-destaque: "Plus Jakarta Sans", var(--fonte-base);
+
+  /* Forma e profundidade (cantos arredondados no padrão shadcn) */
+  --raio-sm: 8px;
+  --raio-md: 12px;
+  --raio-lg: 18px;
+  --raio-pilula: 999px;
+  --sombra-suave: 0 1px 2px rgb(16 37 84 / .06), 0 8px 24px rgb(16 37 84 / .08);
+
+  /* Espaço */
+  --largura-max: 1180px;
+  --gutter: clamp(16px, 4vw, 40px);
+  --navbar-margem: clamp(12px, 2.4vw, 32px);
+
+  /* Movimento */
+  --duracao: 200ms;
+  --curva: cubic-bezier(.2, .7, .2, 1);
+}
+
+/* 2. BASE ================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: var(--fonte-base);
+  font-size: 16px; line-height: 1.55;
+  color: var(--cor-texto);
+  background: var(--cor-fundo-pagina);
+  -webkit-font-smoothing: antialiased;
+}
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+h1, h2, h3, p { margin: 0; }
+button, input { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--verde-500); outline-offset: 3px; border-radius: 6px; }
+[hidden] { display: none !important; }
+
+/* 3. UTILITÁRIOS =========================================================== */
+.icone {
+  width: 20px; height: 20px; flex: none;
+  fill: none; stroke: currentColor; stroke-width: 2;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.pular {
+  position: absolute; left: 16px; top: -60px; z-index: 50;
+  background: var(--azul-900); color: #fff; padding: 10px 16px; border-radius: var(--raio-sm);
+}
+.pular:focus { top: 16px; }
+.so-leitor { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* [FaixaIdentidade] fio verde no topo da página (CSS puro). */
+.faixa-identidade {
+  height: 5px;
+  background: var(--verde-500);
+}
+
+/* Botões --------------------------------------------------------------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 46px; padding: 0 20px;
+  border-radius: var(--raio-md); border: 1.5px solid transparent;
+  font-weight: 600; font-size: 15px; text-decoration: none; cursor: pointer;
+  transition: background-color var(--duracao), box-shadow var(--duracao), transform var(--duracao) var(--curva);
+}
+/* Primário VERDE: única ação principal de cada tela */
+.btn--primario {
+  color: #fff;
+  background: linear-gradient(90deg, var(--verde-700), var(--verde-800));
+  box-shadow: 0 4px 14px rgb(6 107 58 / .25);
+}
+.btn--primario:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgb(6 107 58 / .3); }
+.btn--bloco { width: 100%; }
+.btn--compacto { min-height: 40px; padding: 0 16px; gap: 8px; font-size: 14px; border-radius: 11px; }
+.btn--compacto .icone { width: 17px; height: 17px; }
+
+/* [Marca] símbolo + nome (HTML, para a fonte vir do Google Fonts) ---------- */
+.marca { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
+.marca__simbolo { width: 40px; height: 40px; }
+.marca__nome { display: grid; line-height: 1.1; }
+.marca__nome strong { font-family: var(--fonte-destaque); font-weight: 800; font-size: 21px; letter-spacing: -.01em; color: var(--azul-900); }
+.marca__nome strong span { color: var(--verde-700); }
+.marca__nome small { font-size: 12px; font-weight: 500; color: var(--cor-texto-suave); }
+
+/* 4. COMPONENTES =========================================================== */
+
+/* [Navbar] flutuante, não fixa ------------------------------------------- */
+.navbar { padding: var(--navbar-margem) var(--navbar-margem) 0; position: relative; z-index: 10; }
+.navbar__barra {
+  max-width: calc(var(--largura-max) + 80px); margin: 0 auto;
+  display: flex; align-items: center; gap: 20px;
+  padding: 10px 10px 10px 16px;
+  background: #fff; border: 1px solid var(--cor-borda); border-radius: 18px;
+  box-shadow: var(--sombra-suave);
+}
+.navbar__links { display: flex; gap: 2px; margin: 0 auto; padding: 0; list-style: none; }
+.navbar__links a {
+  display: block; padding: 9px 13px; border-radius: var(--raio-sm);
+  font-size: 14.5px; font-weight: 500; color: var(--cor-texto-suave); text-decoration: none;
+  transition: background-color var(--duracao), color var(--duracao);
+}
+.navbar__links a:hover { background: var(--verde-50); color: var(--verde-800); }
+.navbar__links a[aria-current="page"] { background: var(--verde-100); color: var(--verde-800); font-weight: 600; }
+.navbar__acoes { display: flex; align-items: center; gap: 10px; }
+/* ========================================================================
+   HOME PÚBLICA (index.html) — do Provão vêm só navbar, rodapé e a estrutura centralizada
+   ======================================================================== */
+
+/* [Apresentacao] centralizada sobre a grade de planilha -------------------- */
+.apresentacao {
+  position: relative; overflow: hidden;
+  min-height: calc(100vh - 96px);
+  display: grid; place-items: center;
+  padding: 88px var(--gutter) 104px;
+  text-align: center;
+}
+/* [FundoSVG] home e login: grade de planilha + células animadas num SVG autocontido
+   (assets/img/fundo-*.svg, gerado por assets/img/gerar-fundos.js). A animação está dentro
+   do SVG; js/fundo.js só inicializa. O SVG não escala: fica centrado no topo, 1 unidade = 1 px,
+   para as células baterem com a grade. */
+.fundo-svg {
+  position: absolute; top: 0; left: 50%; translate: -50% 0;
+  width: 2400px; height: 1200px; max-width: none;
+  pointer-events: none; user-select: none;
+}
+
+.apresentacao__conteudo { position: relative; max-width: 780px; display: grid; justify-items: center; gap: 22px; }
+.apresentacao__titulo {
+  font-family: var(--fonte-destaque); font-weight: 800;
+  font-size: clamp(34px, 5.6vw, 62px); line-height: 1.08; letter-spacing: -.025em;
+  color: var(--azul-900); text-wrap: balance;
+}
+/* "Cargas Vagas" em verde, com sublinhado largo em verde claro (fundo em gradiente) */
+.apresentacao__titulo em {
+  font-style: normal; color: var(--verde-700);
+  background: linear-gradient(transparent 72%, var(--verde-100) 72% 94%, transparent 94%);
+}
+.apresentacao__descricao { max-width: 560px; font-size: 18px; color: var(--cor-texto-suave); text-wrap: pretty; }
+
+/* [Fluxo] as quatro etapas em linha, ligadas por um traço.
+   Interação (js/home.js): o ciclo percorre as etapas; data-estado = "" | "ativa" | "feita".
+   Sequência de cada passo: o traço antes da etapa enche de verde (::after, scaleX 0 → 1,
+   300 ms) e a pílula acende em seguida (transition-delay de 250 ms).
+   Só transform/opacity/cores: nada que recalcule layout. */
+.fluxo {
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px;
+  margin: 10px 0 0; padding: 0; list-style: none;
+}
+.fluxo li {
+  position: relative;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 7px 14px 7px 10px; border-radius: var(--raio-pilula);
+  background: rgb(255 255 255 / .85); border: 1px solid var(--cor-borda);
+  font-size: 14px; font-weight: 500; color: var(--cor-texto);
+  cursor: default;
+  transition: background-color .35s, border-color .35s, color .35s, box-shadow .35s, transform .35s var(--curva);
+}
+.fluxo li:focus-visible { outline-offset: 2px; border-radius: var(--raio-pilula); }
+.fluxo li .icone { width: 16px; height: 16px; color: var(--verde-700); transition: color .35s; }
+.fluxo li + li { margin-left: 22px; }
+/* trilho do traço (cinza) e enchimento verde por cima */
+.fluxo li + li::before,
+.fluxo li + li::after {
+  content: ""; position: absolute; left: -24px; top: calc(50% - 1px); width: 18px; height: 2px;
+  border-radius: 2px; pointer-events: none;
+}
+.fluxo li + li::before { background: var(--cor-borda); }
+.fluxo li + li::after {
+  background: var(--verde-500);
+  transform: scaleX(0); transform-origin: left center;
+  transition: transform .3s var(--curva);
+}
+/* etapa ATIVA: verde cheio, sobe 2 px */
+.fluxo li[data-estado="ativa"] {
+  background: var(--verde-700); border-color: var(--verde-700); color: #fff;
+  box-shadow: 0 6px 16px rgb(6 107 58 / .28);
+  transform: translateY(-2px);
+  transition-delay: .25s;
+}
+.fluxo li[data-estado="ativa"] .icone { color: #fff; transition-delay: .25s; }
+/* etapa FEITA: verde claro */
+.fluxo li[data-estado="feita"] { background: var(--verde-50); border-color: rgb(0 168 89 / .45); color: var(--verde-800); }
+.fluxo li[data-estado="ativa"]::after,
+.fluxo li[data-estado="feita"]::after { transform: scaleX(1); }
+
+/* legenda da etapa (texto em data-texto de cada li); só aparece no mouse/foco */
+.fluxo__legenda {
+  min-height: 1.6em; margin-top: -6px;
+  font-size: 14px; color: var(--cor-texto-suave);
+  transition: color .35s;
+}
+
+/* [Rodape] padrão institucional de ponta a ponta (igual ao Provão) ---------- */
+.rodape {
+  position: relative; overflow: hidden; color: #fff;
+  background: linear-gradient(90deg, var(--azul-700) 38.6%, var(--azul-900) 75.1%);
+}
+.rodape__linhas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: right center; pointer-events: none; }
+.rodape__grade {
+  position: relative; max-width: 1460px; margin: 0 auto;
+  padding: 28px clamp(20px, 10vw, 200px) 24px;
+  display: grid; grid-template-columns: 1.4fr 1fr auto; gap: 24px 40px;   /* sistema | endereço | assinatura */
+}
+.rodape__col { display: grid; align-content: start; gap: 6px; }
+.rodape__sistema { font-weight: 600; font-size: 16px; }
+.rodape__orgao { font-size: 14px; opacity: .9; }
+.rodape__base { display: grid; gap: 6px; padding-top: 14px; }
+.rodape__redes img { width: 72px; height: auto; }
+.rodape__copy { font-size: 12px; opacity: .9; }
+.rodape__titulo { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+.rodape__endereco { font-size: 14px; font-style: normal; color: rgb(255 255 255 / .9); line-height: 1.6; }
+.rodape__col--assinatura { justify-items: end; align-content: space-between; gap: 20px; }
+.rodape__seduc { width: 170px; height: auto; }
+.rodape__detin { width: 210px; height: auto; }
+
+/* ========================================================================
+   LOGIN (login.html)
+   ======================================================================== */
+/* [Entrada] fundo de planilha + card centralizado ---------------------------- */
+.entrada {
+  position: relative; overflow: hidden; isolation: isolate;
+  min-height: 100vh; display: grid; grid-template-rows: auto 1fr auto;
+}
+.entrada .fundo-svg { z-index: -1; }
+.entrada__centro {
+  display: grid; justify-items: center; align-content: center; gap: 22px;
+  padding: 48px var(--gutter);
+}
+/* [CartaoLogin] card branco com fio verde no topo */
+.cartao-login {
+  width: 100%; max-width: 420px; display: grid; gap: 18px;
+  padding: 32px; background: #fff;
+  border: 1px solid var(--cor-borda); border-top: 4px solid var(--verde-500);
+  border-radius: var(--raio-lg);
+  box-shadow: 0 1px 2px rgb(16 37 84 / .06), 0 24px 48px rgb(16 37 84 / .12);
+}
+.cartao-login__cabecalho { display: grid; justify-items: center; gap: 6px; text-align: center; margin-bottom: 4px; }
+.cartao-login__cadeado {
+  display: grid; place-items: center; width: 48px; height: 48px; margin-bottom: 6px;
+  border-radius: var(--raio-md); background: var(--verde-100); color: var(--verde-800);
+}
+.cartao-login__titulo { font-family: var(--fonte-destaque); font-weight: 800; font-size: 26px; letter-spacing: -.01em; color: var(--azul-900); }
+.cartao-login__apoio { color: var(--cor-texto-suave); }
+.cartao-login__ajuda { font-size: 13.5px; color: var(--cor-texto-suave); text-align: center; }
+.cartao-login__ajuda a { color: var(--verde-700); font-weight: 600; }
+.entrada__voltar {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 12px 8px 8px; border-radius: var(--raio-sm);
+  font-size: 14px; font-weight: 600; color: var(--cor-texto-suave); text-decoration: none;
+  transition: background-color var(--duracao), color var(--duracao);
+}
+.entrada__voltar:hover { background: var(--verde-50); color: var(--verde-800); }
+.entrada__voltar .icone { width: 18px; height: 18px; }
+.entrada__rodape {
+  display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;
+  padding: 20px var(--gutter) 24px; text-align: center;
+}
+/* a assinatura oficial é branca: fica numa pílula azul */
+.entrada__selo { padding: 8px 12px; border-radius: var(--raio-md); background: var(--azul-900); }
+.entrada__selo img { width: 150px; height: auto; }
+.entrada__rodape small { font-size: 12px; color: var(--cor-texto-suave); }
+.campo { display: grid; gap: 6px; }
+.campo label { font-size: 14px; font-weight: 600; }
+.campo__caixa { position: relative; }
+.campo input {
+  width: 100%; min-height: 46px; padding: 0 14px;
+  border: 1.5px solid var(--cor-borda); border-radius: var(--raio-md); background: #fff;
+  transition: border-color var(--duracao), box-shadow var(--duracao);
+}
+.campo input:hover { border-color: #B9C6DE; }
+.campo input:focus { outline: none; border-color: var(--verde-500); box-shadow: 0 0 0 4px rgb(0 168 89 / .15); }
+.campo input[aria-invalid="true"] { border-color: var(--vermelho-600); }
+.campo--senha input { padding-right: 48px; }
+.campo__olho {
+  position: absolute; right: 4px; top: 4px; width: 38px; height: 38px;
+  display: grid; place-items: center; border: 0; background: none; border-radius: var(--raio-sm);
+  color: var(--cor-texto-suave); cursor: pointer;
+}
+.campo__olho:hover { color: var(--azul-900); background: var(--azul-50); }
+.campo__linha { display: flex; justify-content: space-between; align-items: baseline; }
+.campo__linha a { font-size: 13px; font-weight: 500; color: var(--verde-700); }
+.alerta {
+  display: flex; gap: 10px; align-items: flex-start;
+  padding: 12px 14px; border-radius: var(--raio-md);
+  background: var(--vermelho-50); color: var(--vermelho-600); border: 1px solid #F5C2C2;
+  font-size: 14px; font-weight: 500;
+}
+.alerta .icone { margin-top: 1px; }
+.alerta--ok { background: var(--verde-50); color: var(--verde-800); border-color: var(--verde-100); }
+
+/* 5. RESPONSIVO ============================================================ */
+@media (max-width: 1000px) {
+  .navbar__links { display: none; }
+  .navbar__acoes { margin-left: auto; }
+  .rodape__grade { grid-template-columns: 1fr 1fr; }
+  .rodape__col--assinatura { grid-column: 1 / -1; grid-auto-flow: column; justify-content: space-between; align-items: end; }
+}
+@media (max-width: 600px) {
+  .navbar__barra { gap: 8px; padding: 8px 8px 8px 12px; }
+  .marca__nome small { display: none; }
+  .apresentacao { min-height: 0; padding: 56px 16px 64px; }
+  .cartao-login { padding: 24px 20px; }
+  .apresentacao__descricao { font-size: 16px; }
+  .fluxo { gap: 6px; }
+  .fluxo li + li { margin-left: 0; }
+  .fluxo li + li::before, .fluxo li + li::after { display: none; }
+  .rodape__grade { grid-template-columns: 1fr; text-align: center; padding: 28px 20px 24px; gap: 20px; }
+  .rodape__col, .rodape__col--assinatura { justify-items: center; }
+  .rodape__col--assinatura { grid-auto-flow: row; justify-content: center; gap: 16px; }
+}
+
+/* 6. MOVIMENTO ============================================================= */
+/* Sem animações de entrada nesta etapa (só transições de hover/foco). */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; }
+}

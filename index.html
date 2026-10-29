@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SACV · Sistema de Automação de Cargas Vagas · Seduc-AM</title>
+<meta name="description" content="SACV: sistema da GELOT / SEDUC-AM que ajuda a identificar as cargas vagas de professores da rede estadual, com análise, revisão e consolidação por município.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<!--
+  SACV · HOME PÚBLICA (apresentação do sistema)
+  Mapa: 0. sprite · 1. navbar (Entrar → login.html) · 2. apresentação centralizada
+        · 3. rodapé institucional
+  Do Provão vêm só a navbar, o rodapé e a estrutura centralizada. O visual é do SACV.
+  Só apresenta nome, sistema e intuito. Nada da parte interna (ciclos, números, usuários):
+  as telas internas não fazem parte deste protótipo.
+  Ícones: Lucide 0.460.0 (ISC, https://lucide.dev). Grafismos: autorais (CSS + SVG).
+-->
+</head>
+<body>
+<a class="pular" href="#hero-titulo">Pular para a apresentação</a>
+
+<!-- 0. SPRITE DE ÍCONES (Lucide 0.460.0, ISC) ================================= -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-log-in" viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></symbol>
+  <symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-file-text" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
+  <symbol id="i-badge-check" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></symbol>
+</svg>
+
+<!-- 1. NAVBAR ==================================================================== -->
+<header class="navbar" data-component="Navbar">
+  <nav class="navbar__barra" aria-label="Principal">
+    <a class="marca" href="index.html" aria-label="SACV, início">
+      <img class="marca__simbolo" src="assets/marca/sacv-icone.svg" alt="" width="40" height="40">
+      <span class="marca__nome"><strong>SAC<span>V</span></strong><small>Cargas Vagas · GELOT</small></span>
+    </a>
+    <ul class="navbar__links">
+      <li><a href="#">Manual do usuário</a></li>
+      <li><a href="#">Dúvidas</a></li>
+    </ul>
+    <div class="navbar__acoes">
+      <a class="btn btn--primario btn--compacto" href="login.html">
+        <svg class="icone" aria-hidden="true"><use href="#i-log-in"/></svg>
+        Entrar
+      </a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <!-- 2. APRESENTAÇÃO (centralizada; identidade própria do SACV) ==================
+       Fundo: SVG animado autocontido (grade de planilha + células verdes e a vaga
+       amarela). O JS só inicializa. Tudo autoral. -->
+  <section class="apresentacao" data-component="Apresentacao" aria-labelledby="hero-titulo">
+    <!-- Fundo animado: SVG autocontido (grade + células + animação dentro do arquivo).
+         js/fundo.js só dá a partida: copia data-src para src. data-duracao = duração da
+         animação no SVG, para avisar a página quando termina (evento "fundo:pronto"). -->
+    <img class="fundo-svg" data-src="assets/img/fundo-home.svg" data-duracao="1840" alt="" aria-hidden="true">
+
+    <div class="apresentacao__conteudo">
+      <h1 class="apresentacao__titulo" id="hero-titulo">
+        Sistema de Automação de <em>Cargas Vagas</em>
+      </h1>
+      <p class="apresentacao__descricao">
+        Identifica as cargas vagas de professores da rede estadual com mais agilidade
+        e segurança: cada município é analisado, revisado e consolidado em um só lugar.
+      </p>
+      <!-- O intuito em uma linha: as quatro etapas do processo.
+           Interação (js/home.js + .fluxo no CSS): o ciclo percorre as etapas UMA vez ao
+           carregar e fica consolidado; depois, só o mouse/foco mostra cada etapa.
+           data-texto alimenta a legenda. -->
+      <ol class="fluxo" id="fluxo" aria-label="Etapas do processo">
+        <li tabindex="0" data-texto="A base de cargas da rede entra no sistema."><svg class="icone" aria-hidden="true"><use href="#i-upload"/></svg>Importar</li>
+        <li tabindex="0" data-texto="Cada município é analisado pela equipe da GELOT."><svg class="icone" aria-hidden="true"><use href="#i-map-pin"/></svg>Analisar</li>
+        <li tabindex="0" data-texto="A gerência aprova ou devolve cada análise."><svg class="icone" aria-hidden="true"><use href="#i-badge-check"/></svg>Revisar</li>
+        <li tabindex="0" data-texto="O ciclo fecha com o relatório final."><svg class="icone" aria-hidden="true"><use href="#i-file-text"/></svg>Consolidar</li>
+      </ol>
+      <p class="fluxo__legenda" id="fluxo-legenda" aria-live="polite">&nbsp;</p>
+    </div>
+  </section>
+</main>
+
+<!-- 3. RODAPÉ INSTITUCIONAL (mesmo padrão do Provão) ============================= -->
+<footer class="rodape" data-component="Rodape">
+  <img class="rodape__linhas" src="assets/img/rodape-linhas.svg" alt="" aria-hidden="true">
+  <div class="rodape__grade">
+    <div class="rodape__col">
+      <p class="rodape__sistema">SACV · Sistema de Automação de Cargas Vagas</p>
+      <p class="rodape__orgao">GELOT · SEDUC-AM</p>
+      <div class="rodape__base">
+        <a class="rodape__redes" href="#" aria-label="Redes sociais da Seduc-AM (link pendente)">
+          <img src="assets/img/redes-sociais.svg" alt="" width="84" height="20">
+        </a>
+        <p class="rodape__copy">© 2026 Todos os direitos reservados</p>
+      </div>
+    </div>
+    <div class="rodape__col">
+      <h2 class="rodape__titulo">Endereço</h2>
+      <address class="rodape__endereco">
+        Av. Waldomiro Lustosa,&nbsp;250<br>Japiim II, Manaus – AM<br>CEP: 69076-830
+      </address>
+    </div>
+    <div class="rodape__col rodape__col--assinatura">
+      <img class="rodape__seduc" src="assets/img/assinatura-seduc.svg" alt="Secretaria de Estado de Educação e Desporto Escolar – Governo do Amazonas" width="190" height="58">
+      <img class="rodape__detin" src="assets/img/detin-getag.svg" alt="Desenvolvido pelo Departamento de Tecnologia e Informação (DETIN) – GETAG" width="231" height="30">
+    </div>
+  </div>
+</footer>
+
+<script src="js/fundo.js"></script>
+<script src="js/home.js"></script>
+</body>
+</html>
